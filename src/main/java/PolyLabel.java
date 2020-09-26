@@ -108,11 +108,29 @@ public class PolyLabel {
     }
 
     static class Result {
-        public double x, y, distance;
+        private final double x;
+        private final double y;
+        private final double distance;
         private Result(double x, double y, double distance) {
             this.x = x;
             this.y = y;
             this.distance = distance;
+        }
+
+        public double getX() {
+            return x;
+        }
+
+        public double getY() {
+            return y;
+        }
+
+        public double[] getCoordinates() {
+            return new double[] {x, y};
+        }
+
+        public double getDistance() {
+            return distance;
         }
     }
 
