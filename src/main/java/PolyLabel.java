@@ -2,20 +2,21 @@ import java.util.PriorityQueue;
 
 public class PolyLabel {
 
-    static Result polyLabel(double[][][] polygon) {
+    public static Result polyLabel(double[][][] polygon) {
         return polyLabel(polygon, 1.0, false);
     }
 
-    static Result polyLabel(double[][][] polygon, double precision) {
+    public static Result polyLabel(double[][][] polygon, double precision) {
         return polyLabel(polygon, precision, false);
     }
 
-    static Result polyLabel(double[][][] polygon, boolean debug) {
+    public static Result polyLabel(double[][][] polygon, boolean debug) {
         return polyLabel(polygon, 1.0, debug);
     }
 
-    static Result polyLabel(double[][][] polygon, double precision, boolean debug) {
+    public static Result polyLabel(double[][][] polygon, double precision, boolean debug) {
 
+        // find the bounding box of the outer ring
         double minX = polygon[0][0][0];
         double maxX = minX;
         double minY = polygon[0][0][1];
@@ -34,17 +35,20 @@ public class PolyLabel {
         double half = cellSize / 2;
 
         if (cellSize == 0) {
-            return new Result(0, 0, 0);
+            return new Result(minX, minY, 0);
         }
 
-        java.util.Queue<Cell> cellQueue = new PriorityQueue<>((cell1, cell2) -> (int) (cell2.max - cell1.max));
+        // a priority queue of cells in order of their "potential" (max distance to polygon)
+        PriorityQueue<Cell> cellQueue = new PriorityQueue<>(Cell::compareTo);
 
         for (double x = minX; x < maxX; x += cellSize)
             for (double y = minY; y < maxY; y += cellSize)
                 cellQueue.add(new Cell(x + half, y + half, half, polygon));
 
+        // take centroid as the first best guess
         Cell bestCell = getCentroidCell(polygon);
 
+        // special case for rectangular polygons
         Cell bboxCell = new Cell(minX + width / 2, minY + height / 2, 0, polygon);
         if (bboxCell.distance > bestCell.distance)
             bestCell = bboxCell;
@@ -52,17 +56,21 @@ public class PolyLabel {
         int numProbes = cellQueue.size();
 
         while (cellQueue.size() > 0) {
+            // pick the most promising cell from the queue
             Cell cell = cellQueue.poll();
 
+            // update the best cell if we found a better one
             if (cell.distance > bestCell.distance) {
                 bestCell = cell;
                 if (debug)
-                    System.out.printf("Found best %s after %d probes", String.format("%.2f", cell.distance), numProbes);
+                    System.out.printf("Found best %s after %d probes%n\n", String.format("%.2f", cell.distance), numProbes);
             }
 
+            // do not drill down further if there's no chance of a better solution
             if (cell.max - bestCell.distance <= precision)
                 continue;
 
+            // split the cell into four cells
             half = cell.half / 2;
             cellQueue.add(new Cell(cell.x - half, cell.y - half, half, polygon));
             cellQueue.add(new Cell(cell.x + half, cell.y - half, half, polygon));
@@ -72,14 +80,15 @@ public class PolyLabel {
         }
 
         if (debug) {
-            System.out.println("Num probes: " + numProbes);
-            System.out.println("Best distance: " + bestCell.distance);
+            System.out.printf("Num probes: %d\n", numProbes);
+            System.out.printf("Best distance: %f\n", bestCell.distance);
         }
 
         return new Result(bestCell.x, bestCell.y, bestCell.distance);
     }
-    
-    static Cell getCentroidCell(double[][][] polygon) {
+
+    // get polygon centroid
+    private static Cell getCentroidCell(double[][][] polygon) {
         double area = 0;
         double x = 0;
         double y = 0;
@@ -99,8 +108,8 @@ public class PolyLabel {
     }
 
     static class Result {
-        double x, y, distance;
-        Result(double x, double y, double distance) {
+        public double x, y, distance;
+        private Result(double x, double y, double distance) {
             this.x = x;
             this.y = y;
             this.distance = distance;

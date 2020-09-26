@@ -1,16 +1,15 @@
-public class Cell {
+public class Cell implements Comparable<Cell> {
     double x, y, half, distance, max;
-    double[][][] polygon;
 
     Cell(double x, double y, double half, double[][][] polygon) {
-        this.x = x;
-        this.y = y;
-        this.half = half;
-        this.distance = pointToPolygonDist(x, y, polygon);
-        this.polygon = polygon;
-        this.max = this.distance + this.half * Math.sqrt(2.0);
+        this.x = x; // cell center x
+        this.y = y; // cell center y
+        this.half = half; // half the cell size
+        this.distance = pointToPolygonDist(x, y, polygon); // distance from cell center to polygon
+        this.max = this.distance + this.half * Math.sqrt(2.0); // max distance to polygon within a cell
     }
 
+    // signed distance from point to polygon outline (negative if point is outside)
     private static double pointToPolygonDist(double x, double y, double[][][] polygon) {
         boolean inside = false;
         double minDistSq = Double.MAX_VALUE;
@@ -32,6 +31,7 @@ public class Cell {
         return minDistSq == 0 ? 0 : (inside ? 1 : -1) * Math.sqrt(minDistSq);
     }
 
+    // get squared distance from a point to a segment
     private static double getSegDistSq(double px, double py, double[] a, double[] b) {
 
         double x = a[0];
@@ -59,4 +59,8 @@ public class Cell {
         return dx * dx + dy * dy;
     }
 
+    @Override
+    public int compareTo(Cell cell) {
+        return Double.compare(cell.max, this.max);
+    }
 }
