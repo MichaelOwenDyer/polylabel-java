@@ -35,7 +35,7 @@ class PolyLabelTest {
 
     @Test
     void main2() {
-        PolyLabel.Result result = PolyLabel.polyLabel(new double[][][] {{{0, 0}, {10, 0}, {0, 10}}}, 0.5, true);
+        PolyLabel.Result result = PolyLabel.polyLabel(new Integer[][][] {{{0, 0}, {10, 0}, {0, 10}}}, 0.5, true);
         System.out.printf("\nFound center at (%f, %f)", result.getX(), result.getY());
     }
 
