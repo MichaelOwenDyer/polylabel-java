@@ -1,7 +1,7 @@
 public class Cell implements Comparable<Cell> {
     double x, y, half, distance, max;
 
-    Cell(double x, double y, double half, double[][][] polygon) {
+    Cell(double x, double y, double half, Number[][][] polygon) {
         this.x = x; // cell center x
         this.y = y; // cell center y
         this.half = half; // half the cell size
@@ -10,17 +10,18 @@ public class Cell implements Comparable<Cell> {
     }
 
     // signed distance from point to polygon outline (negative if point is outside)
-    private static double pointToPolygonDist(double x, double y, double[][][] polygon) {
+    private static double pointToPolygonDist(double x, double y, Number[][][] polygon) {
         boolean inside = false;
         double minDistSq = Double.MAX_VALUE;
 
-        for (double[][] ring : polygon)
+        for (Number[][] ring : polygon)
             for (int i = 0; i < ring.length; i++) {
-                double[] current = ring[(i + 1) % ring.length];
-                double[] prev = ring[i];
+                Number[] current = ring[(i + 1) % ring.length];
+                Number[] prev = ring[i];
 
-                if ((current[1] > y != prev[1] > y)
-                        && (x < (prev[0] - current[0]) * (y - current[1]) / (prev[1] - current[1]) + current[0]))
+                if ((current[1].doubleValue() > y != prev[1].doubleValue() > y)
+                        && (x < (prev[0].doubleValue() - current[0].doubleValue()) * (y - current[1].doubleValue())
+                                / (prev[1].doubleValue() - current[1].doubleValue()) + current[0].doubleValue()))
                     inside = !inside;
 
                 double distSq = getSegDistSq(x, y, current, prev);
@@ -32,20 +33,20 @@ public class Cell implements Comparable<Cell> {
     }
 
     // get squared distance from a point to a segment
-    private static double getSegDistSq(double px, double py, double[] a, double[] b) {
+    private static double getSegDistSq(double px, double py, Number[] a, Number[] b) {
 
-        double x = a[0];
-        double y = a[1];
-        double dx = b[0] - x;
-        double dy = b[1] - y;
+        double x = a[0].doubleValue();
+        double y = a[1].doubleValue();
+        double dx = b[0].doubleValue() - x;
+        double dy = b[1].doubleValue() - y;
 
         if (dx != 0 || dy != 0) {
 
             double t = ((px - x) * dx + (py - y) * dy) / (dx * dx + dy * dy);
 
             if (t > 1) {
-                x = b[0];
-                y = b[1];
+                x = b[0].doubleValue();
+                y = b[1].doubleValue();
 
             } else if (t > 0) {
                 x += dx * t;

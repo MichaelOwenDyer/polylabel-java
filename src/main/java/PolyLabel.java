@@ -2,31 +2,31 @@ import java.util.PriorityQueue;
 
 public class PolyLabel {
 
-    public static Result polyLabel(double[][][] polygon) {
+    public static Result polyLabel(Number[][][] polygon) {
         return polyLabel(polygon, 1.0, false);
     }
 
-    public static Result polyLabel(double[][][] polygon, double precision) {
+    public static Result polyLabel(Number[][][] polygon, double precision) {
         return polyLabel(polygon, precision, false);
     }
 
-    public static Result polyLabel(double[][][] polygon, boolean debug) {
+    public static Result polyLabel(Number[][][] polygon, boolean debug) {
         return polyLabel(polygon, 1.0, debug);
     }
 
-    public static Result polyLabel(double[][][] polygon, double precision, boolean debug) {
+    public static Result polyLabel(Number[][][] polygon, double precision, boolean debug) {
 
         // find the bounding box of the outer ring
-        double minX = polygon[0][0][0];
+        double minX = polygon[0][0][0].doubleValue();
         double maxX = minX;
-        double minY = polygon[0][0][1];
+        double minY = polygon[0][0][1].doubleValue();
         double maxY = minY;
         for (int i = 1; i < polygon[0].length; i++) {
-            double[] arr = polygon[0][i];
-            if (arr[0] < minX) minX = arr[0];
-            if (arr[0] > maxX) maxX = arr[0];
-            if (arr[1] < minY) minY = arr[1];
-            if (arr[1] > maxY) maxY = arr[1];
+            Number[] arr = polygon[0][i];
+            if (arr[0].doubleValue() < minX) minX = arr[0].doubleValue();
+            if (arr[0].doubleValue() > maxX) maxX = arr[0].doubleValue();
+            if (arr[1].doubleValue() < minY) minY = arr[1].doubleValue();
+            if (arr[1].doubleValue() > maxY) maxY = arr[1].doubleValue();
         }
 
         double width = maxX - minX;
@@ -88,22 +88,22 @@ public class PolyLabel {
     }
 
     // get polygon centroid
-    private static Cell getCentroidCell(double[][][] polygon) {
+    private static Cell getCentroidCell(Number[][][] polygon) {
         double area = 0;
         double x = 0;
         double y = 0;
-        double[][] points = polygon[0];
+        Number[][] points = polygon[0];
 
         for (int i = 0, len = points.length, j = len - 1; i < len; j = i++) {
-            double[] a = points[i];
-            double[] b = points[j];
-            double diff = a[0] * b[1] - b[0] * a[1];
-            x += (a[0] + b[0]) * diff;
-            y += (a[1] + b[1]) * diff;
+            Number[] a = points[i];
+            Number[] b = points[j];
+            double diff = a[0].doubleValue() * b[1].doubleValue() - b[0].doubleValue() * a[1].doubleValue();
+            x += (a[0].doubleValue() + b[0].doubleValue()) * diff;
+            y += (a[1].doubleValue() + b[1].doubleValue()) * diff;
             area += diff * 3;
         }
         if (area == 0)
-            return new Cell(points[0][0], points[0][1], 0, polygon);
+            return new Cell(points[0][0].doubleValue(), points[0][1].doubleValue(), 0, polygon);
         return new Cell(x / area, y / area, 0, polygon);
     }
 
