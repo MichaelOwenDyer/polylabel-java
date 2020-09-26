@@ -107,7 +107,7 @@ public class PolyLabel {
         return new Cell(x / area, y / area, 0, polygon);
     }
 
-    static class Result {
+    public static class Result {
         private final double x;
         private final double y;
         private final double distance;

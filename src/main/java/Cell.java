@@ -1,4 +1,5 @@
-public class Cell implements Comparable<Cell> {
+class Cell implements Comparable<Cell> {
+
     double x, y, half, distance, max;
 
     Cell(double x, double y, double half, Number[][][] polygon) {
