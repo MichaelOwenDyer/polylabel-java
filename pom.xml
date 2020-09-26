@@ -8,6 +8,31 @@
     <artifactId>polylabel-java</artifactId>
     <version>1.1</version>
 
+    <name>polylabel-java</name>
+    <description>A port of PolyLabel by MapBox</description>
+
+    <scm>
+        <connection>scm:git:https://github.com/FreshLlamanade/polylabel-java.git</connection>
+        <developerConnection>scm:git:git@github.com:FreshLlamanade/polylabel-java.git</developerConnection>
+        <url>https://github.com/FreshLlamanade/polylabel-java</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/FreshLlamanade/polylabel-java</url>
+    </issueManagement>
+
+    <properties>
+        <!-- Encoding Properties -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.outputEncoding>UTF-8</project.build.outputEncoding>
+
+        <!-- JDK Version -->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
