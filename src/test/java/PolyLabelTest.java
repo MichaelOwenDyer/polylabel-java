@@ -27,8 +27,16 @@ class PolyLabelTest {
     @Test
     void main() {
         double[][][] test = new double[][][]{{{4016,1878},{4016,1864},{4029,1859},{4024,1850},{4008,1839},{4006,1863},{4016,1878},{4016,1878}}};
-        PolyLabel.Result result = PolyLabel.polyLabel(test, true);
-        System.out.printf("\nFound center at (%f, %f)", result.x, result.y);
+        PolyLabel.Result result = PolyLabel.polyLabel(test, 1.0);
+        System.out.printf("\nFound center at (%f, %f)", result.getX(), result.getY());
+    }
+
+
+
+    @Test
+    void main2() {
+        PolyLabel.Result result = PolyLabel.polyLabel(new double[][][] {{{0, 0}, {10, 0}, {0, 10}}}, 0.5, true);
+        System.out.printf("\nFound center at (%f, %f)", result.getX(), result.getY());
     }
 
     @Test
