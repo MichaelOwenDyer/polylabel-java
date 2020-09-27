@@ -26,9 +26,9 @@ public class PolyLabel {
         for (int i = 1; i < polygon[0].length; i++) {
             Number[] arr = polygon[0][i];
             if (arr[0].doubleValue() < minX) minX = arr[0].doubleValue();
-            if (arr[0].doubleValue() > maxX) maxX = arr[0].doubleValue();
+            else if (arr[0].doubleValue() > maxX) maxX = arr[0].doubleValue();
             if (arr[1].doubleValue() < minY) minY = arr[1].doubleValue();
-            if (arr[1].doubleValue() > maxY) maxY = arr[1].doubleValue();
+            else if (arr[1].doubleValue() > maxY) maxY = arr[1].doubleValue();
         }
 
         double width = maxX - minX;
