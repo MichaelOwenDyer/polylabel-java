@@ -6,14 +6,24 @@ Official repo: [https://github.com/mapbox/polylabel](https://github.com/mapbox/p
 Article: https://blog.mapbox.com/a-new-algorithm-for-finding-a-visual-center-of-a-polygon-7c77e6492fbc
 
 ## Requirements
-<b>Java 8</b> or later
+<b> - Java 8</b> or later
+
+<b> - Maven</b>
 
 ## Installation
 
+Add polylabel-java to your local .m2 folder with the following commands:
 ```
 git clone https://github.com/FreshLlamanade/polylabel-java
 cd polylabel-java
 mvn clean install
+```
+
+Then add the following dependency to your pom.xml:
+```
+<groupId>com.monst</groupId>
+<artifactId>polylabel-java</artifactId>
+<version>1.2</version>
 ```
 
 ## Usage
