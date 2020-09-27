@@ -3,7 +3,7 @@ A Java port of <b>PolyLabel</b> from MapBox.
 
 Official repo: [https://github.com/mapbox/polylabel](https://github.com/mapbox/polylabel)
 
-Article - https://blog.mapbox.com/a-new-algorithm-for-finding-a-visual-center-of-a-polygon-7c77e6492fbc
+Article: https://blog.mapbox.com/a-new-algorithm-for-finding-a-visual-center-of-a-polygon-7c77e6492fbc
 
 ## Requirements
 <b>Java 8</b> or later
