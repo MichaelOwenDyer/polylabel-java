@@ -1,3 +1,5 @@
+package com.monst.polylabel;
+
 class Cell implements Comparable<Cell> {
 
     double x, y, half, distance, max;

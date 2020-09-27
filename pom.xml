@@ -6,7 +6,7 @@
 
     <groupId>com.monst</groupId>
     <artifactId>polylabel-java</artifactId>
-    <version>1.1</version>
+    <version>1.2</version>
 
     <name>polylabel-java</name>
     <description>A port of PolyLabel by MapBox</description>

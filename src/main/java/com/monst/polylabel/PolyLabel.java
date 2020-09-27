@@ -1,3 +1,5 @@
+package com.monst.polylabel;
+
 import java.util.PriorityQueue;
 
 public class PolyLabel {

@@ -1,14 +1,5 @@
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import com.monst.polylabel.PolyLabel;
 import org.junit.jupiter.api.Test;
-
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Iterator;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class PolyLabelTest {
 
