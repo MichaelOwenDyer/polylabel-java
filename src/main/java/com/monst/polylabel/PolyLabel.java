@@ -98,11 +98,13 @@ public class PolyLabel {
         Number[][] points = polygon[0];
 
         for (int i = 0, len = points.length, j = len - 1; i < len; j = i++) {
-            Number[] a = points[i];
-            Number[] b = points[j];
-            double diff = a[0].doubleValue() * b[1].doubleValue() - b[0].doubleValue() * a[1].doubleValue();
-            x += (a[0].doubleValue() + b[0].doubleValue()) * diff;
-            y += (a[1].doubleValue() + b[1].doubleValue()) * diff;
+            double a0 = points[i][0].doubleValue();
+            double a1 = points[i][1].doubleValue();
+            double b0 = points[j][0].doubleValue();
+            double b1 = points[j][1].doubleValue();
+            double diff = a0 * b1 - b0 * a1;
+            x += (a0 + b0) * diff;
+            y += (a1 + b1) * diff;
             area += diff * 3;
         }
         if (area == 0)
@@ -111,9 +113,9 @@ public class PolyLabel {
     }
 
     public static class Result {
-        private final double x;
-        private final double y;
-        private final double distance;
+
+        private final double x, y, distance;
+
         private Result(double x, double y, double distance) {
             this.x = x;
             this.y = y;
