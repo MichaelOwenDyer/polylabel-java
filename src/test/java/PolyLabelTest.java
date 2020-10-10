@@ -3,7 +3,7 @@ import org.junit.jupiter.api.Test;
 
 class PolyLabelTest {
 
-    static int[][][] water1, water2;
+//    static int[][][] water1, water2;
 //    static {
 //        JSONParser parser = new JSONParser();
 //        try {
@@ -22,17 +22,10 @@ class PolyLabelTest {
         System.out.printf("\nFound center at (%f, %f)", result.getX(), result.getY());
     }
 
-
-
     @Test
     void main2() {
         PolyLabel.Result result = PolyLabel.polyLabel(new Integer[][][] {{{0, 0}, {10, 0}, {0, 10}}}, 0.5, true);
         System.out.printf("\nFound center at (%f, %f)", result.getX(), result.getY());
-    }
-
-    @Test
-    void water1Precision1() {
-
     }
 
 }

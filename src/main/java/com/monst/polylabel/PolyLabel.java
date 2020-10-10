@@ -24,11 +24,12 @@ public class PolyLabel {
         double minY = polygon[0][0][1].doubleValue();
         double maxY = minY;
         for (int i = 1; i < polygon[0].length; i++) {
-            Number[] arr = polygon[0][i];
-            if (arr[0].doubleValue() < minX) minX = arr[0].doubleValue();
-            else if (arr[0].doubleValue() > maxX) maxX = arr[0].doubleValue();
-            if (arr[1].doubleValue() < minY) minY = arr[1].doubleValue();
-            else if (arr[1].doubleValue() > maxY) maxY = arr[1].doubleValue();
+            double x = polygon[0][i][0].doubleValue();
+            double y = polygon[0][i][1].doubleValue();
+            if (x < minX) minX = x;
+            if (x > maxX) maxX = x;
+            if (y < minY) minY = y;
+            if (y > maxY) maxY = y;
         }
 
         double width = maxX - minX;
