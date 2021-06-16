@@ -4,19 +4,19 @@ import java.util.PriorityQueue;
 
 public class PolyLabel {
 
-    public static Result polyLabel(Number[][][] polygon) {
+    public static PolyLabel polyLabel(Number[][][] polygon) {
         return polyLabel(polygon, 1.0, false);
     }
 
-    public static Result polyLabel(Number[][][] polygon, double precision) {
+    public static PolyLabel polyLabel(Number[][][] polygon, double precision) {
         return polyLabel(polygon, precision, false);
     }
 
-    public static Result polyLabel(Number[][][] polygon, boolean debug) {
+    public static PolyLabel polyLabel(Number[][][] polygon, boolean debug) {
         return polyLabel(polygon, 1.0, debug);
     }
 
-    public static Result polyLabel(Number[][][] polygon, double precision, boolean debug) {
+    public static PolyLabel polyLabel(Number[][][] polygon, double precision, boolean debug) {
 
         // find the bounding box of the outer ring
         double minX = polygon[0][0][0].doubleValue();
@@ -38,7 +38,7 @@ public class PolyLabel {
         double half = cellSize / 2;
 
         if (cellSize == 0) {
-            return new Result(minX, minY, 0);
+            return new PolyLabel(minX, minY, 0);
         }
 
         // a priority queue of cells in order of their "potential" (max distance to polygon)
@@ -87,7 +87,7 @@ public class PolyLabel {
             System.out.printf("Best distance: %f\n", bestCell.distance);
         }
 
-        return new Result(bestCell.x, bestCell.y, bestCell.distance);
+        return new PolyLabel(bestCell.x, bestCell.y, bestCell.distance);
     }
 
     // get polygon centroid
@@ -112,31 +112,28 @@ public class PolyLabel {
         return new Cell(x / area, y / area, 0, polygon);
     }
 
-    public static class Result {
+    private final double x, y, distance;
 
-        private final double x, y, distance;
+    private PolyLabel(double x, double y, double distance) {
+        this.x = x;
+        this.y = y;
+        this.distance = distance;
+    }
 
-        private Result(double x, double y, double distance) {
-            this.x = x;
-            this.y = y;
-            this.distance = distance;
-        }
+    public double getX() {
+        return x;
+    }
 
-        public double getX() {
-            return x;
-        }
+    public double getY() {
+        return y;
+    }
 
-        public double getY() {
-            return y;
-        }
+    public double[] getCoordinates() {
+        return new double[]{x, y};
+    }
 
-        public double[] getCoordinates() {
-            return new double[] {x, y};
-        }
-
-        public double getDistance() {
-            return distance;
-        }
+    public double getDistance() {
+        return distance;
     }
 
 }
